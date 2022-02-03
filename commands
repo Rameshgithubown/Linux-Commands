@@ -1,1 +1,1504 @@
+Remote or Delete a file ;-
+
+$ rm -f -r {file-name}
+
+$ rm abc.txt
+
+Rename file - mv currentfile newfile
+
+shutdown -r now    -----  reboot remotly 
+shutdown -h now    -----  shutdown remotly
+
+halt
+poweroff
+reboot
+shutdown
+
+
+sudo chage -l jsmith
+
+check size of the file - du -lsh
+
+vi -----   to edit
+touch ----- to creat file
+mkdir -----   to create directory
+
+chkconfig --list
+------------------------------------
+Apache : -
+
+sudo /etc/init.d/apache2 stop
+sudo /etc/init.d/apache2 start
+sudo /etc/init.d/apache2 status
+sudo /etc/init.d/apache2 restart
+
+sudo service apache2 stop
+sudo service apache2 start
+sudo service apache2 status
+sudo service apache2 restart
+
+Tomcat : -
+sudo /etc/init.d/tomcat6 start
+sudo /etc/init.d/tomcat6 stop
+sudo /etc/init.d/tomcat6 status
+sudo /etc/init.d/tomcat6 restart
+
+sudo service tomcat6 stop
+sudo service tomcat6 start
+sudo service tomcat6 status
+sudo service tomcat6 restart
+
+------------------------------------
+
+Sudo su -
+service networking restart
+init 6 - Shutdown
+halt -p - Poweroff
+
+------------------------------------
+VNC
+service vncserver start
+vncserver -kill :1
+service vncserver restart history
+service vncserver restart
+
+vncpasswd
+
+ sudo /etc/init.d/vnc4server start
+
+netstat -al
+netstat -a
+
+cd ~/.vnc
+cd ls -l
+cd ls -al
+
+to know Firewall status on Ubuntu:
+root@mira:~# sudo ufw status
+output:
+Status: inactive
+
+
+service iptables stop (stopping firawall)
+
+/etc/selinux/config
+vi config (SELinux enforce into SELinux permissive)disabling selinux
+
+/root/.vnc/xstartup
+vi xstartup
+(
+xstartup:
+
+#!/bin/sh
+
+# Uncomment the following two lines for normal desktop:
+unset SESSION_MANAGER
+exec /etc/X11/xinit/xinitrc
+
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+xsetroot -solid grey
+vncconfig -iconic &
+xterm -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
+startx &
+)
+
+/etc/sysconfig/vncservers
+vi vncservers    (black display)
+(
+VNCSERVERS="2:vnc"
+VNCSERVERARGS[2]="-geometry 1024x768 -depth 24"
+)
+--------------------------------------------------
+Installing java in CentOS
+
+$ su -c "yum install java-1.6.0-openjdk"
+--------------------------------------------------
+YUM
+
+yum install "_________"
+yum install "libXm.so.3"
+apt-get intall "libXm.so.3'
+
+sudo apt-get install libstdc++5
+sudo apt-get install libaio-dev  (DB2)
+ ./db2setup
+sudo apt-get install libmotif3  (COGNOS)
+
+--------------------------------------------------
+To Start Apache
+
+# /etc/init.d/apache2 restart --Ubuntu
+# /sbin/service httpd restart --RHEL
+# /sbin/service httpd restart --CentOS
+---------------------------------------------------
+Disable printers
+
+[-HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\RemoteComputer\NameSpace\{2227A280-3AEA-1069-A2DE-08002B30309D}]
+
+Disable scheduled tasks
+
+[-HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\RemoteComputer\NameSpace\{D6277990-4C6A-11CF-8D87-00AA0060F5BF}]
+;Don't search shared printers
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"NoNetCrawling"=dword:00000001
+
+----------------------------------------
+Next enter the following three commands to disable firewall.
+
+# service iptables save
+# service iptables stop
+# chkconfig iptables off
+
+If you are using IPv6 firewall, enter:
+
+# service ip6tables save
+# service ip6tables stop
+# chkconfig ip6tables off
+
+-----------------------------------------
+db2 create database test
+db2 list database directory
+
+db2 connect to BOBIW user username using pwd
+
+db2 connect to BOBIW user username (Windows)
+
+------------------------------------------
+service sshd start
+
+[root@miram home]# service sshd start
+RHEL 5.4...Kirnal 2.1
+------------------------------------------
+Notes/lotus/notes/data
+Lotusnotes/data
+-----------------------------------------
+sudo vi /etc/network/interfaces
+/etc/network/# /etc/network/interfaces restart
+init 6
+# The primary network interface
+auto eth0
+iface eth0 inet dhcp
+
+
+iface eth0 inet static
+address 9.173.153.54
+netmask 255.255.255.0
+gateway 9.173.153.1
+
+DNS :
+nameserver 9.64.162.21
+nameserver 9.64.163.21
+search in.ibm.com
+
+---------------------------------------
+BIts   (32bit or 64bit)
+
+lsb_release -a
+uname -a
+file /sbin/init
+
+i686 i686 i386 GNU/Linux means 32bit
+x86_64 x86_64 x86_64 GNU/Linux  means 64bit
+
+RHEL:
+cat /etc/*-release
+
+---------------------------------------
+ls -l
+ls -al
+ls -r,a,c,,,,
+find / name -----
+more .....
+gedit .....
+--------------------------------------------
+Java
+
+Remove
+
+sudo dpkg -u java
+sudo aptitude remove java (or whatever the exact name is...)
+
+Installed java
+
+sudo find / -name java -print
+sudo update-alternatives --config java
+
+Install
+
+
+-----------------------------------------------
+Cognos
+
+export JAVA_HOME=/usr/java/j2re1.4.2_14
+export PATH=$PATH:$JAVA_HOME
+
+setting environment variable in Ubuntu
+
+file - cat ~/.bashrc
+vi ~/.bashrc  in etc
+---------------------------------------------------
+rpm :
+
+chmod +x file name(j2re-1_4_2_14-linux-i586-rpm.bin)
+./j2re-1_4*
+rpm -ivh j2re-1_4_2_14-linux-i586.rpm  (red colour)
+
+rpm --install --nodeps --force j2re-1_4_2_14-*.rpm (if it is error: Failed dependencies:)
+
+sudo apt-get install openjdk-6-jre
+sudo apt-get install openjdk-6-jdk
+-----------------------------------------------------
+DB2
+
+sudo apt-get install libstdc++5
+sudo apt-get install libaio-dev
+sudo ./db2setup
+---------------------------------------------------
+deb file 
+
+To install a .deb file, simply double click on it, and then select Install Package
+
+Alternatively, you can also install a .deb file by opening a terminal and typing: 
+
+sudo dpkg -i package_file.deb
+
+To uninstall a .deb file, deselect it in your package manager, or type: 
+
+sudo dpkg -r package_name
+--------------------------------------------------------
+db2 startup when restart the server :-
+
+
+9.2. Post-installation notes
+Basic test results (see Section 21 for more details) were successful.
+
+However, I found that after a reboot, the DB2 instance was not being restarted automatically, so clients could not connect to the database. To correct this problem, execute this command as the instance owner: db2set DB2AUTOSTART=YES
+ 
+This will ensure that the DB2 instance is initialized and ready to receive incoming connections after a reboot (intentional or otherwise).
+
+Also, to allow DB2 access through the iptables-based firewall (which is enabled by default), it was necessary to modify the iptables firewall ruleset, which is kept in the /etc/sysconfig/iptables file. If you have enabled your firewall (using the iptables service), and you want to enable external connectivity to your DB2 server, you must open up TCP and UDP access to ports 523 and TCP access to any DB2 service ports. To make this work, add these rules to the iptablesfile (anywhere amongst the -j ACCEPT rules): 
+-A RH-Firewall-1-INPUT -p udp -m udp --dport 523 -j ACCEPT
+-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 523 -j ACCEPT
+-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 50000 -j ACCEPT
+
+These rules were added directly to the iptables file to ensure that they persist in case of a system reboot. Note that you will need to add another new TCP rule to allow firewall access if you create any additional instances later. 
+
+You can use db2 get dbm cfg | grep SVCENAME to retrieve the service names and then check the /etc/services for the equivalent port values to open on your firewall.
+---------------------------------------------------------------
+Apache :
+
+configure script will have options like --with-apache2=/usr/local/apache2 or something. --prefix=/usr/local is also a possibility. Try running ./configure --help from the source directory of passenger to see if these options are available.
+----------------------------------------------------------------
+#!/bin/sh
+
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+#x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
+#x-window-manager &
+/etc/X11/Xsession
+gnome-session &
+------------------------------------------------------------------
+Userd:-
+
+useradd ________
+userdel ________
+
+useradd -md /home/ramesh ramesh
+---------------------------------------------------------------
+useradd -g groupname ramesh (for new usr)
+usermod -g groupname ramesh (for existing usr)
+usermod -a -G group1,group2,group3 username   (multiple group)
+usermod -a -G group1,group2 username (multiple group)
+
+
+root@miram:/# groupadd SYS_MAINT
+root@miram:/# usermod -g SYS_MAINT miraman
+root@miram:/# id miraman
+uid=1000(miraman) gid=1014(SYS_MAINT) groups=1014(SYS_MAINT),4(adm),20(dialout),24(cdrom),46(plugdev),115(sambashare),120(lpadmin),121(admin)
+----------------
+Create new user in Ubuntu:-
+
+root@minelava:~# adduser test
+Adding user `test' ...
+Adding new group `test' (1002) ...
+Adding new user `test' (1002) with group `test' ...
+Creating home directory `/home/test' ...
+Copying files from `/etc/skel' ...
+passwd: Module is unknown
+passwd: password unchanged
+Try again? [y/N] y
+passwd: Module is unknown
+passwd: password unchanged
+Try again? [y/N] n
+Changing the user information for test
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+root@minelava:~# cd /home
+root@minelava:/home# ls
+minelaman  test
+root@minelava:/home# id test
+uid=1002(test) gid=1002(test) groups=1002(test)
+root@minelava:/home# passwd test
+passwd: Module is unknown
+passwd: password unchanged
+root@minelava:/home# passwd test
+passwd: Module is unknown
+passwd: password unchanged
+root@minelava:/home# pam_tally --reset --user test
+User test	(1002)	had 0
+root@minelava:/home# sudo pam-auth-update --force
+root@minelava:/home# passwd test
+Enter new UNIX password: 
+Retype new UNIX password: 
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+root@minelava:/home#
+
+
+----------------------------------------------------------------
+How to change hostname of XenServer 
+
+1. confirm the host uuid
+
+#xe host-list
+
+2. execute xe host-set-hostname-live
+
+#xe host-set-hostname-live host-uuid=<HOSTUUID> host-name=<NEWHOSTNAME>
+
+3. reboot
+
+#reboot 
+----------------------------------------------------------------
+Cognos :
+Steps
+
+1) Ensure that the JAVA_HOME environment variable is set to the JRE location.
+
+2) Copy the following files from the c8_location/bin/jre/version/lib/security directory to the
+Java_location/version/lib/security directory:
+
+local_policy.jar
+US_export_policy.jar
+
+3) Copy the bcprov-jdk13-125.jar file from the c8_location/bin/jre/version/lib/ext directory to
+the Java_location/version/lib/ext directory.
+
+4) If you use Sun JRE 1.4.2 on UNIX, ensure that you are using the correct startup file for the
+/dev/random device.
+You must use /etc/init.d or /etc/rc3.d/f20random.
+For more information, see your UNIX documentation.
+
+5) Start Cognos Configuration.
+
+6) Save the configuration.
+
+Cognos 8 [ ERROR ] Content Manager failed to start because it could not load driver 'com.ibm.db2.jcc.DB2Driver'.
+
+	
+You need to put the Db2 JDBC driver into your Cognos installation. You need to get the db2jcc.jar from your Db2 environment and copy it into <cognos_dir>\webapps\p2pd\WEB-INF\lib.
+
+You will need to restart Cognos Configuration before this is picked up. 
+
+For 4472 issue :-
+(export LD_LIBRARY_PATH=/home/db2inst1/sqllib/lib64)
+
+
+1. Copy the db2java.zip from the /opt/ibm/db2/V9.7/java directory to the Cognos8_location /webapps/p2pd/WEB-INF/lib directory.
+
+then, Rename the db2java.zip file to db2java.jar. 
+
+2. Need to put the Db2 JDBC driver into your Cognos installation. You need to get the db2jcc.jar from your Db2 environment 
+
+and copy it into cognos_dir \webapps\p2pd\WEB-INF\lib.
+
+3.  Copied db2jcc_license_cu.jar from /opt/ibm/db2/V9.7/java directory to the Cognos8_location /webapps/p2pd/WEB-INF/lib directory.
+
+
+-----------------------------------------------------------------
+Environment Setup :
+
+JAVA_HOME=/usr/java/j2re1.4.2_14
+export JAVA_HOME
+PATH=$PATH:/opt/ibm/db2/V9.7/bin:/opt/ibm/db2/V9.7/lib32:/opt/cognos/c8/bin:/opt/cognos/c8/webapps/p2pd/WEB_INF/lib:$JAVA_HOME
+export PATH
+DB2INSTANCE=db2inst2
+export DB2INSTANCE
+LD_LIBRARY_PATH=$PATH:/home/db2inst2/sqllib/lib:/opt/cognos/c8/cgi-bin:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH
+
+export JAVA_HOME=/usr/lib/jvm/java-1.5.0-sun
+
+-------------------------------------------------------------------
+chown -R miraman:miraman /home/miraman
+ env > /home/miraman/env_db2.txt.txt
+
+env > /home/miraman/env_cog.txt.txt
+-----------------------------------------------------------------
+Server status :-
+
+$ who \96b
+Output - system boot  Apr 30 15:08
+$ last reboot | head -1
+Output - reboot   system boot  2.6.15.4         Sun Apr 30 15:08 - 16:22  (01:13)
+
+$ last reboot | less
+
+#finger db2inst1
+---------------------------------------------------------------------
+Kill the particular application ;-
+
+ps -ef | grep java
+ps -ef | more
+kill -9 25443 (Java)
+
+sudo killall Xvnc
+
+ps -U root -u root u
+-------------------------------------------------------------------
+
+Db2 license :
+/opt/ibm/db2/V9.7/adm/db2licm -a db2haexp.lic 
+/opt/ibm/db2/V9.7/adm/db2halicm -l
+
+windows:
+a) check license status:
+db2licm -L
+b) Run the following command in the DB2 license environment: 
+db2licm -a db2ese_o.lic
+
+I spoke to a DB2 developer
+
+We have licences here for internal use - ftp://db2ftp.torolab.ibm.com/devinst/
+----------------------------------------------------------------
+VI EDIT
+
+Ramesh: yesterday i did 
+11:48:48 AM: Ramesh: :wq!
+11:49:06 AM: Vijay Kumar: no
+11:49:14 AM: Vijay Kumar: that is not vi editor
+11:49:20 AM: Ramesh: ooh
+11:49:25 AM: Vijay Kumar: in vi editor u have to do wq
+11:49:29 AM: Vijay Kumar: not wq!
+11:49:29 AM: Ramesh: ok
+11:49:42 AM: Ramesh: here what i need to do for editing
+11:49:44 AM: Ramesh: and 
+11:49:47 AM: Ramesh: how to i save
+11:50:56 AM: Ramesh: ??
+11:51:05 AM: Vijay Kumar: directly u edit
+11:51:25 AM: Vijay Kumar: and after editing press alt+o
+11:51:32 AM: Vijay Kumar: then press ctrl+x
+11:51:44 AM: Vijay Kumar: then it will prompt for save
+11:52:12 AM: Vijay Kumar: type s and press enter and it will ask for which file just press enter
+11:52:23 AM: Vijay Kumar: so it will take default file itself
+11:52:49 AM: Ramesh: not getting , but OK
+11:53:01 AM: Ramesh: directly how you will edit sudoers file
+11:53:04 AM: Ramesh: command ?
+11:53:15 AM: Vijay Kumar: sir
+11:53:23 AM: Vijay Kumar: when u enter in grub mode
+11:53:34 AM: Vijay Kumar: with root prevelege
+11:53:44 AM: Vijay Kumar: then run command visudo
+11:54:19 AM: Ramesh: ok
+11:54:31 AM: Ramesh: alt+o for ?
+11:55:44 AM: Vijay Kumar: to make change which u edited
+11:55:55 AM: Ramesh: Ok, here onwards if i wanted to add any user into sudoers means , directly i can edit and add 
+11:56:17 AM: Ramesh: i mean no need to getinto grup 
+11:57:00 AM: Vijay Kumar: now u have root access
+11:57:16 AM: Vijay Kumar: if u want to add any user to sudo
+11:57:30 AM: Vijay Kumar: directly here only u can
+11:57:38 AM: Vijay Kumar: here u will get vi edit
+11:57:48 AM: Ramesh: hmm
+-----------------------------------------------------------
+Changing Time Servers
+In both cases above, your system will use Ubuntu's NTP server at ntp.ubuntu.com by default. This is OK, but you might want to use several servers to increase accuracy and resilience, and you may want to use time servers that are geographically closer to you. to do this for ntpdate, change the contents of /etc/cron.daily/ntpdate to: 
+
+ntpdate ntp.ubuntu.com pool.ntp.org 
+
+And for ntpd edit /etc/ntp.conf to include additional server lines: 
+
+server ntp.ubuntu.com
+server pool.ntp.org
+
+You may notice pool.ntp.org in the examples above. This is a really good idea which uses round-robin DNS to return an NTP server from a pool, spreading the load between several different servers. Even better, they have pools for different regions - for instance, if you are in New Zealand, so you could use nz.pool.ntp.org instead of pool.ntp.org . Look at http://www.pool.ntp.org/ for more details. 
+
+-------------------------------------------------------------
+Kill the running process ;
+
+ps -ef | grep firefox
+kill -9 _____
+-------------------------------------------------------------
+Installation of DB2 License ;
+
+root@misam:~# ls
+DB2_Exp_Ed_97_Linux_x86.tar.gz  env_db2.txt  Pictures                  Videos
+db2exp_u.lic                    exp          Public
+Desktop                         Lynne        Rational Quality Manager
+Documents                       Music        Templates
+root@misam:~# /opt/ibm/db2/V9.7/adm/db2licm -a db2exp_u.lic
+
+LIC1402I  License added successfully.
+
+
+
+
+LIC1426I  This product is now licensed for use as outlined in your License Agree                                                                             ment.  USE OF THE PRODUCT CONSTITUTES ACCEPTANCE OF THE TERMS OF THE IBM LICENSE                                                                              AGREEMENT, LOCATED IN THE FOLLOWING DIRECTORY: "/opt/ibm/db2/V9.7/license/en_US                                                                             .iso88591"
+root@misam:~# /opt/ibm/db2/V9.7/adm/db2licm -l
+Product name:                     "DB2 Express Edition"
+License type:                     "Authorized User Option"
+Expiry date:                      "Permanent"
+Product identifier:               "db2exp"
+Version information:              "9.7"
+Max number of Value Units:        "200"
+Max amount of memory (GB):        "4"
+Enforcement policy:               "Soft Stop"
+Number of licensed authorized users: "5"
+Features:
+DB2 High Availability Exp:        "Not licensed"
+
+
+
+root@misam:~#
+------------------------------------------------------------
+Removal of samba ;
+
+rpm -qa | grep vnc 
+dpkg -l | grep vnc
+
+dpkg --list   ------ list of installed applications
+dpkg --list | wc -l  ------ no of installed applications
+
+apt-get remove samba
+apt-get remove samba-common
+dpkg --purge samba
+dpkg --purge samba-common
+apt-get remove samba-doc
+apt-get remove samba-tools
+
+rpm -qa | grep firefox
+
+
+chkconfig --list samba  -- check the service is available or not
+
+
+-------------------------------------------------------------------
+
+wget http://www.francescosantini.com/files/vnc/fs-vnc4-common_4.1.2_i386.deb
+wget http://www.francescosantini.com/files/vnc/fs-vnc4server_4.1.2_i386.deb
+sudo dpkg -i fs-vnc4-common_4.1.2_i386.deb
+sudo dpkg -i fs-vnc4server_4.1.2_i386.deb
+
+-------------------------------------------------------------------
+To activate the autostart script:
+
+Log in as the root user. 
+Access the command line. 
+Enter these commands: 
+ln -s /etc/init.d/aiwserv /etc/init.d/rcn.d/Snnaiwserv
+ln -s /etc/init.d/aiwserv /etc/init.d/rcn.d/Knnaiwserv
+
+n and nn are numbers that determine when the script runs. You noted these numbers when you deactivated the autostart script. 
+-----------------------------------------------------------------------------------
+Startup default :
+
+update-rc.d vnc_script defaults
+update-rc.d vnc_script remove
+
+sudo service dropbox start|stop|reload|force-reload|restart|status
+
+update-rc.d -f vnc_script start 99 2 3 4 5 .       works fine
+
+-----------------------------------------------
+
+Start - Restart - Shutdown
+
+That's rather strange. I'm currently running 9.04, and I'm pretty sure that 8.10 loaded the session fine (though I only had 8.10 installed for a few hours). You're sure you ran sudo update-rc.d vncserver defaults? There should be symlinks in the following locations:
+
+/etc/rc0.d/K20vncserver
+/etc/rc1.d/K20vncserver
+/etc/rc2.d/S20vncserver
+/etc/rc3.d/S20vncserver
+/etc/rc4.d/S20vncserver
+/etc/rc5.d/S20vncserver
+/etc/rc6.d/K20vncserver
+----------------------------------------------
+Start my script on startup :
+# update-rc.d -f my_script start 99 2 3 4 5 .
+
+where
+- start is the argument given to the script (start, stop).
+- 99 is the start order of the script (1 = first one, 99= last one)
+- 2 3 4 5 are the runlevels to start
+
+Dont forget the dot at the end
+More info in /etc/rcS.d/README
+
+Start my_script on shutdown and reboot :
+# update-rc.d -f my_script start 90 0 6 .
+
+Stop my_script on halt and reboot :
+# update-rc.d -f my_script reboot 90 0 6 .
+
+For Redhat Linux:
+
+ln -s /etc/init.d/dbora /etc/rc.d/rc0.d/K01dbora
+ln -s /etc/init.d/dbora /etc/rc.d/rc3.d/S99dbora
+ln -s /etc/init.d/dbora /etc/rc.d/rc5.d/S99dbora
+
+
+CHMOD 777 file name   or    CHMOD 750 file name
+
+
+For Cogns
+----------------------------------------------------------------------------------
+Check Ubuntu Version :
+
+root@minelava:/etc# cat lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=10.04
+DISTRIB_CODENAME=lucid
+DISTRIB_DESCRIPTION="Ubuntu 10.04.1 LTS"
+--------------------------------------------------------------------------------
+Mount ISO Image
+
+If you want to mount you need to use the following command
+
+sudo mount debianetch.iso /media/isoimage/ -t iso9660 -o loop
+
+In the above command you can replace debianetch.iso to your own iso image.
+
+Now you should have your iso file mounted, and accessible from your desktop.
+
+Unmount ISO Image
+
+Unmount ISO Image Using the following command
+
+sudo umount /media/isoimage
+-----------------------------------------------
+Like anything else on linux, it\92s easiest to do things from the command line. Open up a terminal window and type in the following commands
+
+sudo mkdir /media/iso
+
+sudo modprobe loop
+
+sudo mount filename.iso /media/iso -t iso9660 -o loop
+
+You should be able to navigate to the /media/iso folder and see the contents of the ISO image. If you want to unmount the iso, use the following command:
+
+sudo umount /media/iso
+
+-----------------------------------------------------------------------------------
+
+Copying fils through scp : from Linux to Linux
+
+root@mira:~# scp -r /home/mirabakman/ubuntu-10.10-server-i386.iso 9.173.153.56:/home/minelaman/
+root@9.173.153.56's password:
+Permission denied, please try again.
+root@9.173.153.56's password:
+ubuntu-10.10-server-i386.iso                   70%  441MB   7.0MB/s   00:26 ETA
+-------------------------------------------------------------------------------------
+
+Allocate swap partition
+
+fdisk -l
+free -m
+df -h
+vi swapfile
+dd if=/dev/zero of=swapfile bs=1024 count=2097152
+mkswap /swapfile
+swapon /swapfile
+du -sh swapfile
+free -m
+vi /etc/fstab - /swapfile swap swap defaults 0 0
+
+free -m , command shows swap... after adding additional swap partion as /root/myswapfile/ , it added the additional extra swap in the main swap partition.
+
+my case , i added 512 mb as additional swap , after the result is 
+root@mira:~# swapon -s
+Filename                                Type            Size    Used    Priority
+/dev/sda5                               partition       10209272        0      -                                                                                                                                               1
+
+root@mira:~# free -m
+             total       used       free     shared    buffers     cached
+Mem:          4025       1166       2858          0        488        206
+-/+ buffers/cache:        472       3553
+Swap:         9969          0       9969
+
+After the below commands :
+
+root@mira:~# swapon -s
+Filename                                Type            Size    Used    Priority
+/dev/sda5                               partition       10209272        0      -                                                                                                                                               1
+/root/myswapfile                        file            524284  0       -2
+root@mira:~# free -m
+             total       used       free     shared    buffers     cached
+Mem:          4025       1688       2337          0        489        718
+-/+ buffers/cache:        480       3545
+Swap:        10481          0      10481
+  503  swapon -s
+  504  dd if=/dev/zero of=/root/myswapfile bs=1M count=512
+  505  swapon -s
+  506  mkswap /myswapfile
+  507  mkswap /root/myswapfile
+  508  swapon -s
+  509  swapon /root/myswapfile
+  510  swapon -s
+
+------------------------------------------------------------
+tonic:
+tonic -o ITCS > tonic.txt
+----------------------------------------
+Operating System :-
+
+Method 1
+
+Click Start, then click on Run or Start Search.
+Type msinfo32.exe and then press Enter key.
+In \93System Information\94, review the value for the System Type item:
+For 32-bit editions of Windows, the value of the System Type item is x86-based PC. 
+For 64-bit editions of Windows, the value of the System Type item is x64-based PC.
+--------------------------------------------------------------
+remove smtp (postfix), rpc (portmap) :
+
+chkconfig --list postfix
+dpkg -l | grep postfix
+ps -ef | grep postfix or ps -ef | grep smtp
+chkconfig --level 2345 postfix off
+chkconfig --level 2358 postfix on
+
+dpkg --list | wc -l
+dpkg --list     >>shows all installed packeges
+--------------------------------------------------------------                    
+server uptime s :-
+C:\>uptime /s > uptime
+C:\>uptime /s >> uptime
+C:\>uptime
+keep uptime.exe on specific directory...
+-----------------------------------------------------------
+
+Banner massage :-
+
+/etc/issue (edit issue file and put the message whatever you want)
+/etc/ssh/sshd_config (edit and uncomment line "Banner /etc/issue")
+-----------------------------------------------------------
+
+set password expire date :
+
+chage --list ramesh
+chage -M 90 ramesh
+chage -W 7 ramesh
+--------------------------------------------------------
+netstat -n -a -p | grep 5900
+ck-list-sessions
+ps -ef | grep vnc
+-------------------------------------------------------
+Enable Automatic file download :-
+
+Internet Explorer 7 
+Open Internet Explorer. 
+Click on the Tools button (the picture of the gear) or \93Tools\94 from the program menu. 
+Click on Internet Options\85. 
+Click the Security tab. 
+In the \93Security level for this zone\94 box, click on Custom level\85. 
+Scroll toward the bottom of the Settings box to Downloads. 
+Enable Automatic Prompting for file downloads. 
+Click OK twice to close the dialogue. 
+Click the Refresh button after the Address Bar at the top of your browser, or hit F5. 
+---------------------------------------------------------
+Enable Java Scripting :-
+
+nternet Explorer 7 
+Open Internet Explorer. 
+Click on the Tools button (the picture of the gear) or \93Tools\94 from the program menu. 
+Click on Internet Options\85. 
+Click the Security tab. 
+In the \93Security level for this zone\94 box, click on Custom level\85. 
+Scroll toward the bottom of the Settings box to Scripting. 
+Enable active scripting. 
+Click OK twice to close the dialogue. 
+Click the Refresh button after the Address Bar at the top of your browser, or hit F5. 
+------------------------------------------------------------
+
+Tomcat 6 : 
+
+sudo /etc/init.d/tomcat6 start
+sudo /etc/init.d/tomcat6 stop
+sudo /etc/init.d/tomcat6 restart
+sudo /etc/init.d/tomcat6 status
+------------------------------------------
+25108 - rada ext
+
+-----------------------------------------
+
+Ubuntu/Debian
+
+Following was tested on clean installs on Debian Squeeze And Ubuntu Jaunty and Karmic:
+Install subversion:
+
+sudo apt-get install subversion python-glade2 python-gtk-vnc
+
+Get the latest openxenmanager build with subversion:
+
+svn co https://openxenmanager.svn.sourceforge.net/svnroot/openxenmanager openxenmanager 
+
+Change directory to the created directory openxenmanager:
+
+cd openxenmanager/trunk 
+
+And start
+
+./openxenmanager
+--------------------------------------------------------------------------------
+
+mount -t smbfs -o username*eli //9.173.153.63/vm stored images /vmimages/iso
+
+--------------------------------------------------------------------------------
+
+changes the attribute of a file
+
+chmod XXX file
+
+XXX= User|Group|Other where X is an integer between 1 and 7
+
+Read = 4, Write = 2, Execution = 1
+
+X= Read + Write + Execution
+
+
+----------------------------------------------------------------
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt-get dist-upgrade
+
+---------------------------------------------
+
+Sita: A project leader will tell the team "All of you, take these axes and start cutting down these trees asap."
+
+A project manager will climb up a tree, look around and say "Shit, we are in the wrong forest."
+---------------------------------------------------------------------------------------
+
+www.ubuntuupdates.org/packages/show/386685
+
+------------------------------------------------
+
+mstsc -v:myserver.hursley.uk.ibm.com -f -console
+
+mstsc -v:myserver.hursley.uk.ibm.com -f -admin
+
+--------------------------------------------------
+
+Ububtu file search :
+
+apt-get install apt-file
+
+apt-get file update
+
+apt-get search filename
+
+----------------------------------------------------
+C:\>SUBST D: C:\Drive_D
+Invalid parameter - D:
+
+C:\>SUBST E: C:\Drive_D
+
+C:\>
+
+For example, to create an alias called D for your C drive, run following command from the "Command Prompt" (or the "DOS Prompt"):
+
+    SUBST D: C:\
+
+To create a logical drive called E, that points to your C:\WORK directory:
+
+    SUBST E: C:\WORK
+
+To delete the aliases or logical drives that you create using SUBST command, run SUBST with the drive name to delete and the parameter "/D"
+
+    SUBST D: /D
+
+    SUBST E: /D
+
+http://www.chami.com/tips/windows/010197W.html
+---------------------------------
+
+net use * /del
+
+-------------------------------
+Last reboot time :
+
+net stats srv
+net statistics server
+
+Statistics since
+
+systeminfo
+
+winmsd
+-------------------------------
+
+Change password in remote windows XP machine :
+
+STEPS:
+
+1.) Download the official PsTools from microsoft directly or click here 
+(downloads.omotech.com/windows/admintools/pstools.zip)
+
+2.) Extract the downloaded file to a folder called PsTools
+
+3.) Just copy pspasswd.exe to your executable path \93C:\Windows\System32?
+
+4.) Open the prompt command line (star -> Run (type \93cmd\94 + OK) and type in the following:
+
+pspasswd \\{IP-Address} -u administrator -p {OldPasswd} administrator {NewPasswd}
+
+Sample is below ...
+
+C:\Users\IBM_ADMIN>pspasswd \\9.180.170.60 -u ramesh -p password ramesh t3ndulkar
+
+PsPasswd v1.22 - Local and remote password changer
+Copyright (C) 2003-2004 Mark Russinovich
+Sysinternals - www.sysinternals.com
+
+Password for 9.180.170.60\ramesh successfully changed.
+
+
+C:\Users\IBM_ADMIN>
+----------------------------------------------------------------
+
+setup particular login hours :
+
+net user bob /times:monday-friday,8am-5pm
+
+----------------------------------------------
+
+df -f 
+
+in xen server to check HDD usage
+---------------------------------
+
+Share Start on Ubuntu :
+
+in /etc/init.d/ directory 
+
+type - status smbd and start eh service after reboot to enable share folders.
+
+-----------------------------------------------------------------------------
+NET SHARE ON UBUNTU ::
+
+Creating Folder Shares from the Command Line : (For ERIS Folder)
+
+1) To create a share:
+Code:
+
+root@eris:~# net usershare add ERIS /home/bobo/ERIS "bobo ERIS" everyone:F guest_ok=y
+
+2) The only thing left to do is change the permissions on the target directory to allow "guests" to actually write to that share:
+Code:
+
+root@eris:~# chmod 777 /home/bobo/ERIS
+
+3) To verify the share definition run the following command:
+Code:
+
+root@eris:~# net usershare info --long
+
+4) In this particular case you should get the following output:
+
+root@eris:~# net usershare info --long
+[ERIS]
+path=/home/bobo/ERIS
+comment=bobo ERIS
+usershare_acl=Everyone:F,
+guest_ok=y
+
+5) If it doesn't work or you want to delete it:
+Code:
+
+net usershare delete ERIS
+
+Note: This will the delete the sharing of th Documents folder not delete the folder itself. 
+
+-----------------------------------------------------------------------------------------
+check pending updates through terminal :
+
+The number of pending security updates can be found using:
+/usr/lib/update-notifier/apt-check 2>&1 | cut -d ';' -f 1
+
+
+and the number of pending regular updates can be found using:
+/usr/lib/update-notifier/apt-check 2>&1 | cut -d ';' -f 2
+
+-----------------------------------------------------------------
+
+usermod -a -G libvirtd rameperu    (add existing user into the group)
+
+gpasswd -d user group (remove group from user)
+
+chage -d 0 rameperu        (set user to change password on their first login)
+
+visudo -f sudoers          (to edit sudoers file)
+------------------------------------
+
+check hw and sw detail:
+
+use cpu-z   --->tools
+use speccy  --->tools
+
+run --> msinfo32  ---> command
+-------------------------------------------
+
+ssh -X root@9.20.170.176
+
+----------------------------------------
+
+sync; echo 3 > /proc/sys/vm/drop_caches
+
+sudo find / -name '*' -size +1G
+sudo find / -name '*' -size +500M
+sudo find / -type d -name '*Trash*' | sudo xargs du -h | sort
+du -hs in /usr tooooo  --- not recomanded to delete /usr
+
+du -hsx * | sort -rh | head -6 		in home dir alone
+
+find / -xdev -type f -size +100000000c -exec ls -lh {} \;
+------------------------------------------------
+
+find /mnt/backups/clm/clmdb/ -mtime +1 -exec rm -rf {} \;
+
+-----------------------------------------------------------------
+Reconfigure windows 7 vm in KVM:
+
+virsh -c qemu:///system list --all
+su -c 'virsh managedsave-remove Virtual_Client_Windows_7-KVM'
+----------------------------------------------------------------
+
+scp -r /opt/ibm/cognos/tm1_64/mi2bi/tm1/PartnerDynamicsDEV/* root@9.20.170.97:/home/rameperu/
+
+ODBCLibraryPath=/opt/ibm/db2/V10.1/lib64/libdb2o.so
+
+mv /data/ibm/cognos/tm1_64/mi2bi/tm1/PartnerDynamicsDEV /data/backup/tmp-back/
+
+===============================================================================================
+
+find /home/ramesh/Pictures/ -type f -name "Thumbs.db" -exec rm -f {} \;
+
+----------------------------------------------------------------------------
+select count(*) from bobin.contr    bobiw query
+select distinct s.inet_addr
+----------------------------------
+history:
+HISTTIMEFORMAT="%D/%M/%Y %t "
+then .. type history
+---------------------------------
+stat file.pdf, file.doc
+-------------------------------
+
+msi installation blocked - by sys admin - use this command - install .msi via command promot 
+
+ msiexec /i install.msi
+
+------------------------------------------------
+curlftpfs -o allow_other ftpuser:m3rc3d3s@ptc37555.hursley.ibm.com/tm1/GTMDynamics_DEV/aux_exports_folder /mnt/ftp_tm1
+
+umount -l /mnt/ftp_tm1
+root@juno:/home/bobiw/bobiw# umount -l /home/bobiw/bobiw/mount_siwp
+
+
+curlftpfs -o allow_other CRD_DataUploader:source_CRD_to_IBP@xlift.dfw.ibm.com/PRD/EP /mnt/ftp_Divya
+
+curlftpfs -o allow_other CRD_DataUploader:source_CRD_to_IBP@xlift.dfw.ibm.com/PRD/NA /mnt/ftp_DivyaNA
+
+sshfs SFTPAffilates@prdbcraibp09.w3-969.ibm.com:/cygdrive/d/Share/IBP/Source_Data_Files/PRD/EP /home/DivyaEP
+sshfs SFTPAffilates@prdbcraibp09.w3-969.ibm.com:/cygdrive/d/Share/IBP/Source_Data_Files/PRD/NA /home/DivyaNA
+umount -l /home/DivyaEP  
+umount -l /home/DivyaNA
+
+sshfs jashiraj@siwb.boulder.ibm.com:/etl_dev/BOBIW_Proj /home/bobiw/bobiw/mount-dir     -----> do it as a user bobiw
+
+curlftpfs -o allow_other ftpuser:m3rc3d3s@ptc37555.hursley.ibm.com/tm1/GTMDynamics /mnt/ftp_Dynamics
+mount.cifs //9.174.204.120/dsgitrepo /home/dsadm/dsgitrepo -o user=bobo,vers=2.0
+umount /home/dsadm/dsgitrepo
+umount -l /dsgitrepo
+----------------------------------------------------------------------------------------------------------------------------
+/opt/ibm/cognos/tm1_64/bin64/shutdown_tm1s.sh /opt/ibm/cognos/tm1_64/mi2bi/tm1/GTMDynamics/
+/opt/ibm/cognos/tm1_64/bin64/startup_tm1s.sh /opt/ibm/cognos/tm1_64/mi2bi/tm1/GTMDynamics/
+---------------------------------------------------------------------------------------------------
+mount.cifs //n000a593.cloud.icds.ibm.com/tm1 /mnt/n000a593 -o user=digitech,vers=2.0
+umount /mnt/n000a593
+cp -r /mnt/n000a593/* /home/bobo/tm1dev
+----------------------------------------------------------------------------------------
+4 = read
+2 = write
+1 = execute
+------------------
+chown root:project1 test.txt
+chown db2srv4: backup.log   (On the directory)
+------------------------------------------------
+
+qemu-img resize Virtual_Client_Windows_7-KVM.qcow2 +10GB
+/var/lib/libvirt/images
+-----------------------------------------------------------------
+Display Isssue : cog 11 server using user ids 
+
+export DISPLAY=:0   -----> Not Helped
+
+================
+
+Before you sudo, do this:
+
+$ xauth extract /tmp/xauthstuff $DISPLAY
+
+After you sudo, do this:
+
+# xauth merge /tmp/xauthstuff
+
+This should work !
+
+Please do remember to rm /tmp/xauthstuff afterwards
+
+http://superuser.com/questions/131101/xforwarding-doesnt-allow-for-switching-users
+---------
+Asssuming you did
+$ssh -X rameperu@hostname
+sh
+Gain root privileges,
+$sudo -s
+
+and merge the Xauth information like this:
+#xauth merge /home/rameperu/.Xauthority
+
+BStime, followed by the left arrow key to get to the pane on the left.
+Switching to a different pane uses the C-b <arrow key> shortcut
+http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/
+    Ctrl+b c Create a new window (with shell)
+    Ctrl+b w Choose window from a list
+    Ctrl+b 0 Switch to window 0 (by number )
+    Ctrl+b , Rename the current window
+    Ctrl+b % Split current pane horizontally into two panes
+    Ctrl+b " Split current pane vertically into two panes
+    Ctrl+b o Go to the next pane
+    Ctrl+b ; Toggle between the current and previous pane
+    Ctrl+b x Close the current pane
+
+Customizing Tmux 
+https://charmyin.github.io/scp/2014/10/07/run-scp-in-background/
+===================================================================================================
+Notes:
+Restart Server - Stops the server and then restarts the server after a brief delay.
+Quit - Stops the server. This command is identical to the Exit server command.
+Exit - Stops the server. This command is identical to Quit.
+https://www.ibm.com/support/knowledgecenter/en/SSKTMJ_8.5.3/com.ibm.help.domino.admin85.doc/H_ABOUT_NOTES_SERVER_COMMANDS.html
+=====================================================================================
+Compress / Zip
+$ tar -cvzf scheduler.tar.gz scheduler
+Uncompress / unizp
+$ tar -xvzf scheduler.tar.gz
+=========================================
+umount /mnt/backups
+umount /exports/backups
+mount -t glusterfs /etc/glusterfs/backups.vol /mnt/backups
+virsh list --all
+virsh start bobiw
+service apache2 start
+service iptables stop
+---------------------------------------------------------------------
+password never expire - linux
+chage -l vivek   --> to check
+chage -I -1 -m 0 -M 99999 -E -1 username     --> to change
+chage -m 0 in07217m
+
+unlock user account - pam_tally2 -r -u readuser
+------------------------------
+Add additional hard disk space for KVM windows machine:
+[ramesh@oc4031261160 Desktop]$ sudo virsh list --all
+[ramesh@oc4031261160 Desktop]$ sudo virsh vol-list --pool default
+[ramesh@oc4031261160 Desktop]$ sudo virsh vol-resize Virtual_Client_Windows_7-KVM.qcow2 50G --pool default
+
+go to windows and resize using disk management.
+----------------------------------------------------------------------------------------------------------------
+Remote Desktop:
+xfreerdp --plugin cliprdr -u D06AS\\digitech -g 1200x700 --sec tls n000a593.cloud.icds.ibm.com
+-----------------------------------------------------------------------------------------------------
+release account locked failure linux
+pam_tally2 -r -u db2inst1
+pam_tally2 -r -u db2inst2
+
+Checking the user account locked status using passwd command.
+
+# passwd -S in07217m
+
+    LK: Password locked
+    NP: No password
+    PS: Password set
+
+# grep in07217m /etc/shadow
+-----------------------------------------
+systemctl status sendmail
+mailq
+mail -a /home/in07217m/testemail.txt -s "Backup File" ramesh.perumal@in.ibm.com < /dev/null
+systemctl status sendmail
+
+sendmail.mc:
+define(`SMART_HOST', `smtp.icds.ibm.com')dnl
+
+sendmail.cf:
+# "Smart" relay host (may be null)
+DSsmtp.icds.ibm.com
+-----------------------------------------
+db2 -stvf createDb.sql
+-------------------------------
+myfile.tar.7z  -->  7za x myfile.tar.7z
+-------------------------------------------
+rpm -ivh		-->install
+rpm -Uvh		-->upgrade
+rpm -ev		-->erise
+rpm -ev --nodeps 	-->erise no depds
+rpm -qa		-->list
+---------------------------------------------
+Resolution issue - Fix
+yum update
+vim /etc/X11/xorg.conf.d/10-missing-resolution.conf
+yum update
+cat 10-missing-resolution.conf
+Section "Monitor"
+  Identifier "eDP-1"
+  Modeline "1680x1050R"  119.00  1680 1728 1760 1840  1050 1053 1059 1080 +hsync -vsync  
+  Modeline "1440x900R"   88.75  1440 1488 1520 1600  900 903 909 926 +hsync -vsync
+  Modeline "1368x768R"   72.25  1368 1416 1448 1528  768 771 781 790 +hsync -vsync
+  Modeline  "1600x900_60.00"   118.25  1600 1696 1856 2112   900  903  908  934 -hsync +vsync
+EndSection
+----------
+. /home/db2inst1/sqllib/db2profile 
+----------------------------------
+db2cfexp
+db2cfimp
+-----------------------
+can you click --> start --> pick run --. type --> aperc --> click --> Ok
+then you can see there is a new icon exists in your system tray called IBM Big Fix Target, just move your cursor close to the icon , it will show you the ip address starts with 9....
+just share the ip .. i will try connect 
+
+Linux: Please go to terminal and enter aperc and
+
+2.Now please look for a blue circular icon at the bottom right corner of your screen , right click on it and
+select "connection info" and help with ip address starting with 9. 
+--------------------------------------------------------------------
+mount.cifs //n000a594.cloud.icds.ibm.com/boxsync /mnt/miprod -o user=miprod,vers=2.0
+rsync -avzh /var/load/miprod/boxsync/ /mnt/miprod/
+rsync -avz rpmpkgs/ root@192.168.0.101:/home/
+
+----------------------------------------------------------------------------------------
+Touch is being disabled by default for now. Touch support is disabled on T460 and T470 only, but It is still enabled on Carbon X1.
+
+To re-enable Touch support,  open a Terminal window, run the following commands, and then restart your computer:
+sudo rm /etc/X11/xorg.conf.d/disable-touchscreen.conf
+sudo touch /etc/sysconfig/enable-touchscreen
+--------------------------------------------------------------------------------------------
+sslConnection=true;
+-------------------------
+scp pull - scp in07217m@n000a489.cloud.icds.ibm.com:/backup/cognos/ca_srv_linuxi38664_11.0.12.18101713.bin /backup/cognos/
+scp push - scp -r filename in07217m@n000a489.cloud.icds.ibm.com:/backup/cognos/ca_srv_linuxi38664_11.0.12.18101713.bin
+-r should be used for directories
+------------------------------------------------------------------------------------------------------------------------------
+db2:
+db2 activate database cmeme
+db2 unquiesce instance db2inst1
+-----------------------------------------------------------------------
+net localgroup group_name UserLoginName /add
+net localgroup administrators John /add
+-----------------------------------------------
+source ~/.bashrc
+---------------------
+windows 10: unable to ping host / ip address; Run the below command. it will work.
+I had issues ping-ing a Windows 10 VM, even if I turned on the file and printer sharing rule.
+So I added the following:
+
+netsh advfirewall firewall add rule name="ping" protocol=ICMPV4 dir=in action=allow
+-------------------------------------------------------------------------------------------------
+grant db2 select access:
+db2 grant select on COGNOS.COGIPF_MOBILESERVICE to user ds_user
+COGNOS.COGIPF_MOBILESERVICE - Table Name
+To check user list granted for particular table.
+db2 "select GRANTEE, SELECTAUTH from syscat.tabauth where TABNAME='COGNOS.COGIPF_RUNREPORT'"
+To check schema and owner name:
+db2 "select SCHEMANAME,OWNER from syscat.schemata"
+------
+db2 connect to logeme
+db2 grant select on COGNOS.COGIPF_RUNREPORT to user ds_user
+db2 grant select on COGNOS.COGIPF_MOBILESERVICE to user ds_user
+db2 grant select on COGNOS.COGIPF_USERLOGON to user ds_user
+db2 terminate
+db2 connect to logburst
+user - ds_user' id
+pass - New42DayNew42Day
+---------------------------------------------------------------------------------------------------
+service --status-all
+will show you uname, OS level, version, and other details too...
+---------------------------------------------------------------------
+Raghavan - javascript path :
+Copy javascript.zip from below path
+/opt/ibm/cognos/analytics/samples/JavaScript
+to 
+/opt/ibm/cognos/analytics/webcontent/bi/samples/javascript/AppBar/AppBar.js
+You have to create folder call javascript in the above directory.
+------------------------------------------------------------------------------
+HI, If you thing i helped, Please submit your feedback and comments on ACE Please...
+--------------------------------------------------------------------------------------
+db2 -x "select 'grant select on table ' || rtrim(tabschema) || '.' || rtrim(tabname) || ' to user in045676;' from syscat.tables where tabschema = 'COGNOS' " > db2_grant_select.ddl
+----------------------------
+db2 grant role EME_READER to user gb122732
+--------------------------------------------
+db2 grant role STAGE_SUPPORT_ADMIN to user gb122732
+--------------------------------------------------------
+db2 grant role STAGE_SUPPORT_READER to user gb122732
+----------------------------------------------------------
+
+Here are the instructions to establish a remote connection:
+
+    Right click on the desktop and open the Terminal. Type in 'aperc' and press Enter.
+    On the system tray, usually to the top or bottom right corner of the screen, you would see a blue circular icon with two curved white lines (Tivoli Ayudame Premium Edition/ IBM BigFix Remote Control).
+    Right click on this icon and click on 'Connection Info'
+    Help me with the 9.x.x.x IP address that you see in the IP list.
+
+Thank you so much. I will send the request. Please accept the request.
+-----------------------------------------------------------------------------
+wifi IBM Network issue:
+https://daymvs1.pok.ibm.com/ibmca-wireless/view/certificates.do
+-----------------------------------------------------------------------------
+Team - please note latest on Coronovirus (I assume we all receive this comms .. but just incase .. )
+---------------------------------------------------------------------------------------------------------
+
+it was formed by combining two words: “development” and “operations”. DevOps is a collaborative way of developing and deploying software.DevOps (a portmanteau of development and operations) is a software development method that stresses communication, collaboration and integration between software developers and information technology (IT) operation professionals.
+
+It was formed by combining two words: “development” and “operations”. DevOps is a collaborative way of deploying software. DevOps is a software development method that stresses communication, collaboration and integration between software developers and operation professionals.
+
+Developers  always  want  to  deliver  changes  as  soon  as  possible.  Operations want reliability and stability
+
+DevOps break down the walls between developmentand operations team, unifying development to operations for better, faster outcomes.
+
+we see DevOps as a discipline, which allows us  to  bridge  the  gap  between  ongoing  development  and  opera-tions.
+
+
+https://www.happiestminds.com/whitepapers/devops.pdf
+
+ftp://public.dhe.ibm.com/software/au/rational/devops/AgileAustralia_IBM_ContinuousDelivery_Product_Demo_Session.pdf
+https://www.ibm.com/cloud/learn/devops-a-complete-guide
+
+1 - Serviw 
+2 - cloudsiw
+3 - serviciw
+4 - BUSSRVS
+5 - SERVEIW
+6 - ServPlus
+7 - ServiceU
+8 - servhub
+9 - services
+10 - bobglobal
+--------------------------------------
+provides:
+yum provides '*/libncurses.so.5'
+---------------------------------------
+cognos - ssl - certificate - update:
+SHOULD BE COGNOS USER
+cd bin
+./ThirdPartyCertificateTool.sh -c -e -p NoPassWordSet -a RSA -r "request412.csr" -d "CN=eme.eme.icds.ibm.com,OU=Support,O=IBM,L=Ottawa,C=CA" -H "eme.eme.icds.ibm.com"
+after receiving the certificate:
+
+cd /opt/ibm/cognos/analytics/bin
+./ThirdPartyCertificateTool.sh -i -T -r /home/cognos/ssl/root.cer -p NoPassWordSet
+./ThirdPartyCertificateTool.sh -i -T -r /home/cognos/ssl/intermediate.cer -p NoPassWordSet
+./ThirdPartyCertificateTool.sh -i -e -r /home/cognos/ssl/n001a412.cer -t /home/cognos/ssl/chain.cer -p NoPassWordSet
+-----------------------------------------------------------------------------------------------------------------------------
+Finally working!
+
+For future reference - you need the hostname in ICDS DNS and you need ICDS DNS server in /etc/resolv.conf (and also in /etc/sysconfig/network-scripts/ifcfg-eth0
+DNS1=9.149.23.30
+so that it doesn't get overwritten on reboot.)
+
+You also need the lookup in /etc/hosts
+
+So for example on this server n001a324 - upgrade.gbsr.icds.ibm.com - 9.149.23.147 we had to have in /etc/hosts
+9.149.23.147 upgrade.gbsr.icds.ibm.com
+
+Ramesh confirms this is working now... so closing.
+----------------------------------------------------------------------------------------------------------------------------------
+Training is good and trainer was able to answer the questions. 
+We got VM for lab which was pre installed and configured already, So not seen the install and configurations steps.
+trainer explained all the configuration settings in detaild. 
+trainer covered more about cognos and dispatcher services and Architecture, 
+Also we learned configurations and settings about distributed environment. 
+
+Training is good and trainer was able to answer the questions. She explained all the configuration settings in detaild. Trainer covered more about cognos roles and dispatcher services and Architecture, Also we learned configurations and settings about distributed environment. Overall trainig was good and we learned all in detailed. 
+----------------------------------------------
+
+xauth extract /tmp/xauthstuff $DISPLAY
+sudo -s
+xauth merge /tmp/xauthstuff
+cp .Xauthority /home/cognos/.Xauthority
+sudo su cognos
+-----------------------------------------------
+
+wget https://download4.boulder.ibm.com/sdfdl/v2/sar/CM/IM/0a670/0/Xa.2/Xb.jusyLTSp44S0Bsj7nXMkHArgZo7fnPidThgKIzlFRUWx1QCHsKT1t0JIdoo/Xc.CM/IM/0a670/0/casrv-11.2.1-2112131054-linuxi38664h.zip/Xd./Xf.Lpr./Xg.11553842/Xi.habanero/XY.habanero/XZ.XHzGwEd9I2l3aia9fUleeboE68WpBsNL/casrv-11.2.1-2112131054-linuxi38664h.zip
+------------------------------------------------------
+WAS:
+cd /opt/IBM/WebSphere/AppServer/profiles/InfoSphere/bin
+./startServer.sh server1
+
+Restart Agent:
+cd /opt/IBM/InformationServer/ASBN*/bin
+./NodeAgents.sh stop
+./NodeAgents.sh start
+
+Start DS Engine.
+cd /opt/IBM/InformationServer/Server/DSE*
+. ./dsenv
+bin/uv -admin -start
+
+Logs:
+(systemout.log)
+cd /opt/IBM/WebSphere/AppServer/profiles/InfoSphere/logs/server1/
+
+You can check datastage server version here: more /opt/IBM/InformationServer/Version.xml
+You can check datastage client version here: C:/IBM/InformationServer/Version.xml
+
+kafka, solr, zookeeper:
+/opt/IBM/InformationServer/Shared-Open-source/bin
+Linux services.
+kafka port - 59092 : solr port - 58983 : zookeeper port - 52181
+root@n001a699 [/opt/IBM/InformationServer/Clients/istools/cli]./istool.sh solr healthCheck -c dqecExceptionSets -u isadmin -p t3ndulkar@tendulkar
+[root@lin-rhl84-int-1 IBM]# find . -name log4j-*
+--------------------------------------------------------------------
+system update: Linux software updates /aplications updates:
+sudo dnf clean all
+sudo dnf update
+-----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
